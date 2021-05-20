@@ -1,13 +1,20 @@
 package com.surittec.spring.boot.crud.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@Entity(name = "Users")
 @Table(name = "users")
 public class User {
 	private long id;
@@ -21,12 +28,15 @@ public class User {
 	private String city;
 	private String state;
 	private String complement;
+	private Boolean updatePermission;
+	private List<Email> emails;
+	private List<Phone> phones;
 	
 	public User() {
 		
 	}
 	
-	public User(String username, String name, String cpf, String address, String cep, String neighborhood, String city, String state, String complement) {
+	public User(String username, String name, String cpf, String address, String cep, String neighborhood, String city, String state, String complement, List<Email> emails, List<Phone> phones) {
 		this.username = username;
 		this.name = name;
 		this.cpf = cpf;
@@ -36,6 +46,8 @@ public class User {
 		this.city = city;
 		this.state = state;
 		this.complement = complement;
+		this.emails = emails;
+		this.phones = phones;
 	}
 	
 	@Id
@@ -130,11 +142,39 @@ public class User {
 	}
 
 	@Column(name = "password", nullable = false)
+	@JsonProperty(access = Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	@Column(name = "update_permission", nullable = true)
+	public Boolean getUpdatePermission() {
+		return updatePermission;
+	}
+
+	public void setUpdatePermission(Boolean updatePermission) {
+		this.updatePermission = updatePermission;
+	}
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	public List<Email> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
+	}
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	public List<Phone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
 	}
 }
