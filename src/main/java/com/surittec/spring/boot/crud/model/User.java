@@ -28,7 +28,7 @@ public class User {
 	private String city;
 	private String state;
 	private String complement;
-	private Boolean updatePermission;
+	private Boolean editPermission;
 	private List<Email> emails;
 	private List<Phone> phones;
 	
@@ -36,7 +36,7 @@ public class User {
 		
 	}
 	
-	public User(String username, String name, String cpf, String address, String cep, String neighborhood, String city, String state, String complement, List<Email> emails, List<Phone> phones) {
+	public User(String username, String name, String cpf, String address, String cep, String neighborhood, String city, String state, String complement, List<Email> emails, List<Phone> phones, Boolean editPermission) {
 		this.username = username;
 		this.name = name;
 		this.cpf = cpf;
@@ -48,6 +48,7 @@ public class User {
 		this.complement = complement;
 		this.emails = emails;
 		this.phones = phones;
+		this.editPermission = editPermission;
 	}
 	
 	@Id
@@ -151,13 +152,13 @@ public class User {
 		this.password = password;
 	}
 	
-	@Column(name = "update_permission", nullable = true)
-	public Boolean getUpdatePermission() {
-		return updatePermission;
+	@Column(name = "edit_permission", nullable = true)
+	public Boolean getEditPermission() {
+		return editPermission;
 	}
 
-	public void setUpdatePermission(Boolean updatePermission) {
-		this.updatePermission = updatePermission;
+	public void setEditPermission(Boolean editPermission) {
+		this.editPermission = editPermission;
 	}
 
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.ALL }, orphanRemoval = true)

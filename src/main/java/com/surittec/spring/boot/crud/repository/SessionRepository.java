@@ -3,9 +3,9 @@ package com.surittec.spring.boot.crud.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.surittec.spring.boot.crud.model.User;
+import com.surittec.spring.boot.crud.model.Session;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-	public User findByUsername(String username);
+public interface SessionRepository extends JpaRepository<Session, Long> {
+	public Session findByUserId(Long user_id);
 }
