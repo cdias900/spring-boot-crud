@@ -22,6 +22,12 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<?> unauthorizedException(UnauthorizedException ex, WebRequest req) {
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> internalErrorException(Exception ex, WebRequest req) {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), req.getDescription(false));

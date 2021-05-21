@@ -8,4 +8,5 @@ import com.surittec.spring.boot.crud.model.Session;
 @Repository
 public interface SessionRepository extends JpaRepository<Session, Long> {
 	public Session findByUserId(Long user_id);
+	public Session findByToken(String token);
 }
