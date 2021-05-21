@@ -16,7 +16,7 @@ public class Utils {
 	
 	public static boolean isNameValid(String name) {
 		if(name != null && name.length() > 0) {
-			String expression = "^[A-ZÁ-Ú0-9 ]*$";
+			String expression = "^[A-ZÁ-Úa-zá-ú0-9 ]*$";
 			Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
 	        Matcher matcher = pattern.matcher(name);
 	        if (matcher.matches()) return true;

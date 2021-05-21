@@ -33,7 +33,7 @@ public class User {
 	private Boolean editPermission;
 	private List<Email> emails;
 	private List<Phone> phones;
-	
+
 	public User() {
 		
 	}
