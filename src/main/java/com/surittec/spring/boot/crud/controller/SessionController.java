@@ -1,11 +1,13 @@
 package com.surittec.spring.boot.crud.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -62,5 +64,10 @@ public class SessionController {
 			return;
 		sessionRepository.deleteById(session.getId());
 		return;
+	}
+	
+	@GetMapping("/sessions")
+	public List<Session> getAllSessions() {
+		return sessionRepository.findAll();
 	}
 }
