@@ -38,10 +38,10 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	/*@GetMapping
+	@GetMapping
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
-	}*/
+	}
 	
 	@PostMapping
 	public User createUser(@Validated @RequestBody User user) throws BadRequestException {
