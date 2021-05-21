@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name = "Phones")
+@Entity
 @Table(name = "phones")
 public class Phone {
 	private long id;
@@ -31,7 +31,7 @@ public class Phone {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	public long getId() {
 		return id;
 	}
