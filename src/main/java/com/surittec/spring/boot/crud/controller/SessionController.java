@@ -7,7 +7,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -48,10 +47,10 @@ public class SessionController {
 			throw new ResourceNotFoundException("Username not found");
 		if(!passwordEncoder.matches(password, user.getPassword())) 
 			throw new UnauthorizedException("Invalid password");
-		Session session = sessionRepository.findByUserId(user.getId());
-		if(session != null)
-			sessionRepository.deleteById(session.getId());
-		session = new Session();
+		List<Session> sessions = sessionRepository.findByUserId(user.getId());
+		if(sessions != null && sessions.size() > 0)
+			sessions.forEach(s -> sessionRepository.deleteById(s.getId()));			
+		Session session = new Session();
 		session.setToken(UUID.randomUUID().toString());
 		session.setUser(user);
 		return sessionRepository.save(session);
@@ -64,10 +63,5 @@ public class SessionController {
 			return;
 		sessionRepository.deleteById(session.getId());
 		return;
-	}
-	
-	@GetMapping("/sessions")
-	public List<Session> getAllSessions() {
-		return sessionRepository.findAll();
 	}
 }
